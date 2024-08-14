@@ -1,3 +1,28 @@
 <resources>
     <string name="app_name">ASimpleCafe</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--  NAVBAR & DIALOGS  -->
+    <string name="open">open</string>
+    <string name="close">close</string>
+
+    <!--  BUTTON  -->
+    <string name="bayar">BAYAR</string>
+
+    <!--  CART LAYOUT  -->
+    <string name="person_icon">icon of a person</string>
+    <string name="pelanggan">Customer</string>
+    <string name="no_order">"Order Num: "</string>
+    <string name="number">int</string>
+    <string name="cart_quantity">Total Produk</string>
+    <string name="default_number">0</string>
+    <string name="rupiah_denominator">"Rp "</string>
+    <string name="cart_price_text">Total Harga</string>
+    <string name="nama_produk">Nama Produk</string>
+
+    <!--  PLACEHOLDER TESTER WEIGHT LINEAR DISTRIBUTION  -->
+    <string name="home">HOME</string>
+    <string name="receipt">STRUK</string>
+    <string name="stub">SIMPANAN</string>
 </resources>

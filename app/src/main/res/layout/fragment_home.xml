@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:layout_gravity="center"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.HomeFragment">
+
+<!--    <TextView-->
+<!--        android:id="@+id/frag_home_intro"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_weight="1"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:textAlignment="center"-->
+<!--        android:text="@string/hello_blank_fragment"/>-->
+
+    <include
+        android:id="@+id/home_cart"
+        layout="@layout/cart_layout"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.615" />
+<!--    <TextView-->
+<!--        android:id="@+id/frag_home_intro2"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:layout_weight="0.615"-->
+<!--        android:textAlignment="center"-->
+<!--        android:text="@string/hello_blank_fragment"/>-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
