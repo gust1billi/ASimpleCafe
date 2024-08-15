@@ -1,16 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.ReceiptFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/frag_receipt_intro"
-        android:gravity="center"
+    <include
+        android:id="@+id/frag_receipt_list"
+        layout="@layout/fragment_receipt_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_weight="2"
+        android:layout_gravity="start"/>
 
-</FrameLayout>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/receipt_detail_total_receipt_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:text="@string/receipt_detail_total_transactions"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/receipt_detail_total_receipt_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/default_number"
+                app:layout_constraintLeft_toLeftOf="@id/receipt_detail_total_receipt_text"
+                app:layout_constraintRight_toRightOf="@id/receipt_detail_total_receipt_text"
+                app:layout_constraintTop_toBottomOf="@id/receipt_detail_total_receipt_text"/>
+
+            <TextView
+                android:id="@+id/receipt_detail_profit_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="4dp"
+                android:text="@string/receipt_detail_total_profit_text"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+            <TextView
+                android:id="@+id/receipt_detail_profit_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rupiah_denominator"
+                app:layout_constraintTop_toBottomOf="@id/receipt_detail_profit_text"
+                app:layout_constraintLeft_toLeftOf="@id/receipt_detail_profit_text"/>
+
+            <View
+                android:id="@+id/receipt_detail_HGuideline"
+                app:layout_constraintTop_toTopOf="@id/receipt_detail_HGuideline"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                style="@style/horizontal_divider"/>
+            <TextView
+                android:id="@+id/frag_receipt_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:textSize="24sp"
+                android:text="STATUS: "
+                app:layout_constraintTop_toBottomOf="@id/receipt_detail_HGuideline"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/frag_receipt_detail_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/gray"
+                app:layout_constraintTop_toBottomOf="@id/frag_receipt_status">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:text="@string/frag_receipt_detail_id"/>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/frag_receipt_detail_RecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginStart="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/frag_receipt_detail_id"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+<!--    &lt;!&ndash; TODO: Update blank fragment layout &ndash;&gt;-->
+<!--    <TextView-->
+<!--        android:id="@+id/frag_receipt_intro"-->
+<!--        android:gravity="center"-->
+<!--        android:layout_weight="1"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:text="@string/hello_blank_fragment" />-->
+
+</LinearLayout>

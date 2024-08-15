@@ -19,8 +19,6 @@ import com.example.asimplecafe.R;
 public class StubFragment extends Fragment {
     private static final String TAG = "Stub Fragment";
 
-    TextView introTV;
-
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -66,7 +64,7 @@ public class StubFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_stub, container, false);
-        introTV = view.findViewById( R.id.frag_stub_intro ); introTV.setText(TAG);
+        // TODO: TEMPATNYA RECYCLER VIEW INIT
         return view;
     }
 }

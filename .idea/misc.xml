@@ -3,14 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/IDM/AndroidStudioProjects/ASimpleCafe/app/src/main/res/drawable/bg_product_quantity.xml" value="0.136" />
         <entry key="..\:/IDM/AndroidStudioProjects/ASimpleCafe/app/src/main/res/layout/activity_main.xml" value="0.2609375" />
-        <entry key="..\:/IDM/AndroidStudioProjects/ASimpleCafe/app/src/main/res/layout/cart_layout.xml" value="0.27395833333333336" />
+        <entry key="..\:/IDM/AndroidStudioProjects/ASimpleCafe/app/src/main/res/layout/cart_layout.xml" value="0.264" />
         <entry key="..\:/IDM/AndroidStudioProjects/ASimpleCafe/app/src/main/res/layout/cart_rv.xml" value="0.6" />
         <entry key="..\:/IDM/AndroidStudioProjects/ASimpleCafe/app/src/main/res/layout/fragment_home.xml" value="0.264" />
-        <entry key="..\:/IDM/AndroidStudioProjects/ASimpleCafe/app/src/main/res/layout/fragment_receipt.xml" value="0.275" />
+        <entry key="..\:/IDM/AndroidStudioProjects/ASimpleCafe/app/src/main/res/layout/fragment_receipt.xml" value="0.264" />
+        <entry key="..\:/IDM/AndroidStudioProjects/ASimpleCafe/app/src/main/res/layout/fragment_receipt_list.xml" value="0.2" />
         <entry key="..\:/IDM/AndroidStudioProjects/ASimpleCafe/app/src/main/res/layout/fragment_stub.xml" value="0.275" />
+        <entry key="..\:/IDM/AndroidStudioProjects/ASimpleCafe/app/src/main/res/layout/fragment_stub_list.xml" value="0.275" />
         <entry key="..\:/IDM/AndroidStudioProjects/ASimpleCafe/app/src/main/res/layout/product_rv.xml" value="0.27395833333333336" />
         <entry key="..\:/IDM/AndroidStudioProjects/ASimpleCafe/app/src/main/res/layout/receipt_rv.xml" value="0.27395833333333336" />
+        <entry key="..\:/IDM/AndroidStudioProjects/ASimpleCafe/app/src/main/res/layout/rv_cart.xml" value="0.6" />
+        <entry key="..\:/IDM/AndroidStudioProjects/ASimpleCafe/app/src/main/res/layout/rv_receipt.xml" value="0.4" />
+        <entry key="..\:/IDM/AndroidStudioProjects/ASimpleCafe/app/src/main/res/layout/rv_receipt_details.xml" value="0.6" />
         <entry key="..\:/IDM/AndroidStudioProjects/ASimpleCafe/app/src/main/res/menu/navigation_menu_list.xml" value="0.27395833333333336" />
       </map>
     </option>

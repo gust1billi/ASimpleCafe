@@ -8,14 +8,42 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.HomeFragment">
 
-<!--    <TextView-->
-<!--        android:id="@+id/frag_home_intro"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_weight="1"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:textAlignment="center"-->
-<!--        android:text="@string/hello_blank_fragment"/>-->
+    <!-- PRODUCTS HEADER -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/frag_home_AppBarLayout"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/frag_home_divider_guideline">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/frag_home_product_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/purple_200">
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/frag_home_product_search_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"/>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/frag_home_product_RecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/frag_home_AppBarLayout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/frag_home_divider_guideline"/>
+
+    <View
+        android:id="@+id/frag_home_divider_guideline"
+        style="@style/vertical_divider"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        app:layout_constraintRight_toLeftOf="@id/home_cart" />
 
     <include
         android:id="@+id/home_cart"
@@ -24,13 +52,5 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="0.615" />
-<!--    <TextView-->
-<!--        android:id="@+id/frag_home_intro2"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:layout_weight="0.615"-->
-<!--        android:textAlignment="center"-->
-<!--        android:text="@string/hello_blank_fragment"/>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

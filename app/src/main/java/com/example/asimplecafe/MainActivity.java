@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity
     public NavigationView navView;
     public ActionBarDrawerToggle actionBarDrawerToggle;
 
-    TextView placeholder;
     FrameLayout fragment_frame;
 
     @Override
@@ -44,16 +43,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.nav_home ){
-            placeholder.setText( R.string.home );
-            setFragmentWeights( 0.615F);
+//            setFragmentWeights( 0.615F );
             replaceMainFragment( new HomeFragment( ) );
         } else if (item.getItemId() == R.id.nav_receipt){
-            placeholder.setText( R.string.receipt );
-            setFragmentWeights( 3.0F);
             replaceMainFragment( new ReceiptFragment( ) );
         } else if (item.getItemId() == R.id.nav_stub ) {
-            placeholder.setText( R.string.stub );
-            setFragmentWeights( 1.0F);
             replaceMainFragment( new StubFragment( ) );
         }
         drawerLayout.closeDrawer(GravityCompat.START);
@@ -66,13 +60,12 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         activityInits(); drawerLayoutInits();
 
-        placeholder = findViewById(R.id.placeholder_TV);
         fragment_frame = findViewById(R.id.main_frame_layout);
     }
 
-    private void setFragmentWeights( float fragmentWeight ) {
-        fragment_frame.setLayoutParams( Utils.editMainLinearLayoutWeight( fragmentWeight ));
-    }
+//    private void setFragmentWeights( float fragmentWeight ) {
+//        fragment_frame.setLayoutParams( Utils.editMainLinearLayoutWeight( fragmentWeight ));
+//    }
 
     private void drawerLayoutInits(){
         drawerLayout = findViewById(R.id.main_drawer_layout);

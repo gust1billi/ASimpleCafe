@@ -3,13 +3,21 @@ package com.example.asimplecafe.fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.asimplecafe.R;
+import com.example.asimplecafe.adapter.ReceiptAdapter;
+import com.example.asimplecafe.adapter.ReceiptDetailAdapter;
+import com.example.asimplecafe.model.Cart;
+import com.example.asimplecafe.model.ConstantValues;
+import com.example.asimplecafe.model.Receipt;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,7 +27,10 @@ import com.example.asimplecafe.R;
 public class ReceiptFragment extends Fragment {
     private static final String TAG = "Receipt Fragment";
 
-    TextView introTV;
+    RecyclerView detailRV, receiptRV;
+    LinearLayoutManager detailLayoutManager, receiptLayoutManager;
+    ReceiptDetailAdapter detailAdapter; ReceiptAdapter receiptAdapter;
+    List<Cart> detailList; List<Receipt> receiptList;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -66,7 +77,18 @@ public class ReceiptFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_receipt, container, false);
-        introTV = view.findViewById( R.id.frag_receipt_intro ); introTV.setText(TAG);
+        receiptRV = view.findViewById(R.id.frag_receipt_RecyclerView);
+        detailRV = view.findViewById(R.id.frag_receipt_detail_RecyclerView);
+        detailList = ConstantValues.getDummyCartItems(); // TEST ONLY
+        receiptList = ConstantValues.getDummyReceipts(); // TEST ONLY
+        receiptAdapter = new ReceiptAdapter( ReceiptFragment.this, receiptList );
+        detailAdapter = new ReceiptDetailAdapter( ReceiptFragment.this, detailList);
+        detailLayoutManager = new LinearLayoutManager( getContext() );
+        receiptLayoutManager = new LinearLayoutManager( getContext() );
+
+        detailRV.setAdapter( detailAdapter ); detailRV.setLayoutManager( detailLayoutManager );
+        receiptRV.setAdapter( receiptAdapter ); receiptRV.setLayoutManager( receiptLayoutManager );
+
         return view;
     }
 }

@@ -1,15 +1,28 @@
 package com.example.asimplecafe.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.asimplecafe.R;
+import com.example.asimplecafe.Utils;
+import com.example.asimplecafe.adapter.CartAdapter;
+import com.example.asimplecafe.adapter.ProductAdapter;
+import com.example.asimplecafe.model.Cart;
+import com.example.asimplecafe.model.ConstantValues;
+import com.example.asimplecafe.model.Product;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,7 +32,10 @@ import com.example.asimplecafe.R;
 public class HomeFragment extends Fragment {
     private static final String TAG = "Home Fragment";
 
-//    TextView introTV;
+    RecyclerView cartRV, productRV;
+    LinearLayoutManager cartLayoutManager, productLayoutManager;
+    CartAdapter cartAdapter; ProductAdapter productAdapter;
+    List<Cart> cartList; List<Product> productList;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -66,5 +82,28 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 //        introTV = view.findViewById( R.id.frag_home_intro ); introTV.setText( TAG );
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        cartRV = view.findViewById(R.id.frag_home_cart_RecyclerView);
+        productRV = view.findViewById(R.id.frag_home_product_RecyclerView);
+        cartList = ConstantValues.getDummyCartItems(); // TEST ONLY
+        productList = ConstantValues.getDummyProducts(); // TEST ONLY
+        cartAdapter = new CartAdapter( getContext() , cartList);
+        productAdapter = new ProductAdapter( HomeFragment.this, productList );
+        cartLayoutManager = new LinearLayoutManager( getContext() );
+        productLayoutManager = new LinearLayoutManager( getContext() );
+
+        cartRV.setAdapter( cartAdapter ); cartRV.setLayoutManager( cartLayoutManager );
+        productRV.setAdapter( productAdapter ); productRV.setLayoutManager( productLayoutManager );
+    }
+
+
+    public void addToCart(String product_name, int product_price) {
+//         Utils.showToast( getContext() , "p" );
+        Log.e(TAG, "pepe");
     }
 }
