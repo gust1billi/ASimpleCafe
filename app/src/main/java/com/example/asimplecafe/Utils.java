@@ -40,4 +40,9 @@ public class Utils {
                 "dd-MM-yyyy hh:mm:ss", Locale.getDefault());
         return dateFormat.format(date);
     }
+
+    public static String chop(String str){
+        return str.substring(0, str.length() - 1);
+    }
+
 }

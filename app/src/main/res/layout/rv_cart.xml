@@ -12,19 +12,29 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_height="wrap_content"
             android:layout_width="match_parent">
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/rv_cart_left_vertical_guideline"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.15"/>
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/rv_cart_right_vertical_guideline"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.65"/>
             <TextView
                 android:id="@+id/cart_product_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginEnd="8dp"
                 android:layout_marginTop="4dp"
                 android:textAlignment="textStart"
                 android:maxLines="4"
                 android:textSize="11sp"
                 android:text="@string/nama_produk"
-                app:layout_constraintLeft_toRightOf="@id/cart_qty"
-                app:layout_constraintRight_toLeftOf="@id/rv_product_price_text"
+                app:layout_constraintLeft_toLeftOf="@id/rv_cart_left_vertical_guideline"
+                app:layout_constraintRight_toRightOf="@id/rv_cart_right_vertical_guideline"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
@@ -44,7 +54,7 @@
                 android:id="@+id/rv_product_price_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="64dp"
+                android:layout_marginEnd="48dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="4dp"
                 android:textSize="11sp"

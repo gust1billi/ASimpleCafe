@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity
 
     private void activityInits() {
         Log.e(TAG, "Post");
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+//        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         replaceMainFragment( new HomeFragment() );
     }
 

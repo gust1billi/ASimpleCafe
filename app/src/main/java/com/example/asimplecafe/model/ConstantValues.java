@@ -48,20 +48,20 @@ public class ConstantValues {
     public static List<Receipt> getDummyReceipts(){
         List<Receipt> objectList = new ArrayList<>();
 
-        objectList.add( new Receipt(1 , 51000, Utils.getDateTime( )) );
-        objectList.add( new Receipt(2 , 55000, Utils.getDateTime( )) );
-        objectList.add( new Receipt(3 , 23000, Utils.getDateTime( )) );
-        objectList.add( new Receipt(4 , 630000, Utils.getDateTime( )) );
-        objectList.add( new Receipt(5 , 123000, Utils.getDateTime( )) );
-        objectList.add( new Receipt(6 , 80000, Utils.getDateTime( )) );
-        objectList.add( new Receipt(7 , 10000, Utils.getDateTime( )) );
-        objectList.add( new Receipt(8 , 15000, Utils.getDateTime( )) );
-        objectList.add( new Receipt(9 , 30000, Utils.getDateTime( )) );
-        objectList.add( new Receipt(10, 62000, Utils.getDateTime( )) );
-        objectList.add( new Receipt(11, 27000, Utils.getDateTime( )) );
-        objectList.add( new Receipt(12, 35000, Utils.getDateTime( )) );
-        objectList.add( new Receipt(13, 12000, Utils.getDateTime( )) );
-        objectList.add( new Receipt(14, 90000, Utils.getDateTime( )) );
+        objectList.add( new Receipt(1 , 51000, 51000,0 , Utils.getDateTime( )) );
+        objectList.add( new Receipt(2 , 55000, 55000,0, Utils.getDateTime( )) );
+        objectList.add( new Receipt(3 , 23000, 23000,0, Utils.getDateTime( )) );
+        objectList.add( new Receipt(4 , 630000, 630000,0, Utils.getDateTime( )) );
+        objectList.add( new Receipt(5 , 123000, 123000,0, Utils.getDateTime( )) );
+        objectList.add( new Receipt(6 , 80000, 80000,0, Utils.getDateTime( )) );
+        objectList.add( new Receipt(7 , 10000, 10000,0, Utils.getDateTime( )) );
+        objectList.add( new Receipt(8 , 15000, 15000,0, Utils.getDateTime( )) );
+        objectList.add( new Receipt(9 , 30000, 30000,0, Utils.getDateTime( )) );
+        objectList.add( new Receipt(10, 62000, 62000,0, Utils.getDateTime( )) );
+        objectList.add( new Receipt(11, 27000, 27000,0, Utils.getDateTime( )) );
+        objectList.add( new Receipt(12, 35000, 35000,0, Utils.getDateTime( )) );
+        objectList.add( new Receipt(13, 12000, 12000,0, Utils.getDateTime( )) );
+        objectList.add( new Receipt(14, 90000, 90000,0, Utils.getDateTime( )) );
         return objectList;
     }
 }

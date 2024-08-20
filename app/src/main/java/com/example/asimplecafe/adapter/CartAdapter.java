@@ -8,10 +8,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.asimplecafe.R;
 import com.example.asimplecafe.Utils;
+import com.example.asimplecafe.fragment.HomeFragment;
 import com.example.asimplecafe.model.Cart;
 
 import java.util.ArrayList;
@@ -19,12 +21,16 @@ import java.util.List;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
     private static final String TAG = "CART ADAPTER";
-    Context ctx;
+    Fragment fragment;
 
     List<Cart> cartList;
 
-    public CartAdapter(Context ctx, List<Cart> list) {
-        this.ctx = ctx;
+    public CartAdapter(Fragment frag, List<Cart> list ) {
+        this.fragment = frag;
+        this.cartList = list;
+    }
+
+    public CartAdapter( List<Cart> list ) {
         this.cartList = list;
     }
 
@@ -43,7 +49,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         holder.price.setText( String.valueOf( item.getPrice( ) ) );
         holder.quantity.setText( String.valueOf( item.getQty( ) ) );
         holder.itemView.setOnClickListener(
-                view -> Utils.showToast( ctx, "p" ) );
+                view -> ((HomeFragment)fragment)
+                        .setEditQuantityDialog(
+                                holder.name.getText().toString(),
+                                holder.quantity.getText().toString(),
+                                position
+                        )
+        );
     }
 
     @Override
@@ -68,7 +80,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         notifyItemRangeChanged(0, positionStack );
     }
 
-    public void itemAdded(int positionStack) {
+    public void itemQtyAdded(int positionStack) {
         Log.e(TAG, "size: " + cartList.size() );
 
         notifyItemChanged( positionStack );

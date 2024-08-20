@@ -15,6 +15,7 @@ public class Cart implements Serializable {
     public Cart(String name, int price) {
         this.name = name;
         this.price = price;
+        this.qty = 1;
     }
 
     public String getName() {
@@ -27,5 +28,13 @@ public class Cart implements Serializable {
 
     public int getQty() {
         return qty;
+    }
+
+    public void addQuantity() {
+        this.qty++;
+    }
+
+    public void setQty(int qty) {
+        this.qty = qty;
     }
 }

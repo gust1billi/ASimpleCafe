@@ -10,6 +10,8 @@ import androidx.annotation.Nullable;
 
 import com.example.asimplecafe.Utils;
 
+import java.util.Date;
+
 public class DBHandler extends SQLiteOpenHelper {
     private static final String TAG = "Database Handler";
 
@@ -96,15 +98,70 @@ public class DBHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public int addReceipt(int total_price, int pembayaran, int kembalian) {
+    public Cursor readAllProducts(){
+        Cursor cursor = null;
+        SQLiteDatabase db = DBHandler.this.getReadableDatabase();
+        if (db != null)
+            cursor = db.rawQuery(
+                    "SELECT * FROM " + PRODUCTS_TABLE_NAME
+                            + " ORDER BY " + PRODUCT_NAME
+                    ,null);
+        return cursor;
+    }
+
+    public Cursor readAllReceipts(){
+        Cursor cursor = null;
+        SQLiteDatabase db = DBHandler.this.getReadableDatabase();
+        if ( db != null )
+            cursor = db.rawQuery(
+                    "SELECT * FROM "
+                            + RECEIPT_TABLE_NAME
+                    , null);
+        return cursor;
+    }
+
+    public void addProduct(String name, int price){
         SQLiteDatabase db = DBHandler.this.getWritableDatabase();
-        ContentValues receiptValues = assignReceipt(total_price, pembayaran, kembalian);
+        ContentValues values = assignProduct(name, price, "");
+        long result = db.insert(PRODUCTS_TABLE_NAME, null, values);
+    }
+
+    private ContentValues assignProduct(String name, int price, String imageUri) {
+        ContentValues values = new ContentValues();
+        values.put(PRODUCT_NAME, name);
+        values.put(PRODUCT_PRICE, price);
+        values.put(PRODUCT_IMAGE, imageUri);
+        return values;
+    }
+
+    public void addReceiptProduct( int receipt_id, int product_id, int product_qty ){
+        SQLiteDatabase db = DBHandler.this.getWritableDatabase();
+        ContentValues receiptProductValues =
+                assignReceiptProducts(receipt_id, product_id, product_qty);
+        long result = db.insert(RECEIPT_PRODUCT_TABLE_NAME, null, receiptProductValues);
+//        showCallback(result, "ADD RECEIPT PRODUCTS");
+    }
+
+    private ContentValues assignReceiptProducts(
+            int receipt_id, int product_id, int product_qty ){
+        ContentValues values = new ContentValues();
+        values.put(RECEIPT_PRODUCT_RID, receipt_id);
+        values.put(RECEIPT_PRODUCT_PID, product_id);
+        values.put(RECEIPT_PRODUCT_QTY, product_qty);
+        return values;
+    }
+
+//    public int addReceipt(int total_price, int pembayaran, int kembalian) {
+    public int addReceipt( int total_price, int pembayaran, int kembalian ) {
+        SQLiteDatabase db = DBHandler.this.getWritableDatabase();
+        ContentValues receiptValues =
+                assignReceipt( total_price, pembayaran, kembalian );
         long result = db.insert(RECEIPT_TABLE_NAME, null, receiptValues);
         Utils.showCallback(TAG, result, "RECEIPT TABLE");
         return getReceiptId();
     }
 
-    private ContentValues assignReceipt(int total_price, int pembayaran, int kembalian){
+    private ContentValues assignReceipt( int total_price, int pembayaran, int kembalian ) {
         ContentValues values = new ContentValues();
         values.put(RECEIPTS_TOTAL_PRICE, total_price);
         values.put(RECEIPTS_PAID, pembayaran);
@@ -121,6 +178,21 @@ public class DBHandler extends SQLiteOpenHelper {
         cursor = db.rawQuery("SELECT " + COLUMN_ID + " FROM " + RECEIPT_TABLE_NAME
                 , null );
         cursor.moveToLast();
+        int result = cursor.getInt(0);
+        cursor.close();
+
+        return result;
+    }
+
+    public int getProductId( String name ){
+        SQLiteDatabase db = DBHandler.this.getReadableDatabase();
+        Cursor cursor;
+        cursor = db.rawQuery(
+                "SELECT " + COLUMN_ID + " FROM " + PRODUCTS_TABLE_NAME +
+                        " WHERE " + PRODUCT_NAME + " = \"" + name + "\""
+                ,null);
+        cursor.moveToFirst();
+
         int result = cursor.getInt(0);
         cursor.close();
 

@@ -1,6 +1,7 @@
 package com.example.asimplecafe.fragment;
 
-import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,15 +14,23 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.example.asimplecafe.PaymentActivity;
 import com.example.asimplecafe.R;
 import com.example.asimplecafe.Utils;
 import com.example.asimplecafe.adapter.CartAdapter;
 import com.example.asimplecafe.adapter.ProductAdapter;
+import com.example.asimplecafe.api.APIHandler;
+import com.example.asimplecafe.database.DBHandler;
+import com.example.asimplecafe.dialog.DialogEditQuantity;
 import com.example.asimplecafe.model.Cart;
-import com.example.asimplecafe.model.ConstantValues;
 import com.example.asimplecafe.model.Product;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,7 +44,13 @@ public class HomeFragment extends Fragment {
     RecyclerView cartRV, productRV;
     LinearLayoutManager cartLayoutManager, productLayoutManager;
     CartAdapter cartAdapter; ProductAdapter productAdapter;
-    List<Cart> cartList; List<Product> productList;
+
+    List<Cart> cartList; List<Product> productList; List<String> titleList;
+
+    TextView frag_home_total_paid, frag_home_total_qty;
+    ImageView purgeImage;
+
+    Button payBtn;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -69,10 +84,16 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        cartList = new ArrayList<>( );
+        productList = new ArrayList<>( );
+        titleList = new ArrayList<>( );
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        setRetainInstance(true);
     }
 
     @Override
@@ -85,14 +106,23 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onViewCreated(@NonNull View contentView, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(contentView, savedInstanceState);
 
-        cartRV = view.findViewById(R.id.frag_home_cart_RecyclerView);
-        productRV = view.findViewById(R.id.frag_home_product_RecyclerView);
-        cartList = ConstantValues.getDummyCartItems(); // TEST ONLY
-        productList = ConstantValues.getDummyProducts(); // TEST ONLY
-        cartAdapter = new CartAdapter( getContext() , cartList);
+        cartRV = contentView.findViewById(R.id.frag_home_cart_RecyclerView);
+        productRV = contentView.findViewById(R.id.frag_home_product_RecyclerView);
+        frag_home_total_paid = contentView.findViewById(R.id.cart_price_number);
+        frag_home_total_qty = contentView.findViewById(R.id.cart_quantity_number);
+
+        purgeImage = contentView.findViewById( R.id.cart_purge_image );
+        purgeImage.setOnClickListener( view -> clearCart( ) );
+        payBtn = contentView.findViewById(R.id.frag_home_payment_button);
+        payBtn.setOnClickListener( view -> callPaymentActivity() );
+//        cartList = ConstantValues.getDummyCartItems(); // TEST ONLY
+//        productList = ConstantValues.getDummyProducts(); // TEST ONLY
+        checkDB();
+
+        cartAdapter = new CartAdapter( HomeFragment.this , cartList);
         productAdapter = new ProductAdapter( HomeFragment.this, productList );
         cartLayoutManager = new LinearLayoutManager( getContext() );
         productLayoutManager = new LinearLayoutManager( getContext() );
@@ -101,9 +131,107 @@ public class HomeFragment extends Fragment {
         productRV.setAdapter( productAdapter ); productRV.setLayoutManager( productLayoutManager );
     }
 
+    private void checkDB() {
+        DBHandler dbHandler = new DBHandler( getContext() );
+        Cursor cursor = dbHandler.readAllProducts();
+        productList.clear();
+
+        if ( cursor.getCount() != 0 ) {
+            while ( cursor.moveToNext( ) ) {
+                productList.add( new Product(
+                        cursor.getString(1),
+                        cursor.getInt(2)
+                ) );
+            }
+        } else APIHandler.doLogin( getContext(), HomeFragment.this );
+    }
 
     public void addToCart(String product_name, int product_price) {
-//         Utils.showToast( getContext() , "p" );
-        Log.e(TAG, "pepe");
+        // JIKA JUDUL BELUM PERNAH MASUK KE CART
+        if ( !titleList.contains( product_name ) ){
+            titleList.add( product_name );
+            // Pakai title list karena List<Object>.get(position).contains pusing
+            Log.e(TAG, "TITLE LIST: " + titleList.size());
+            cartList.add( new Cart( product_name, product_price ) );
+            cartAdapter.newItemAdded( titleList.indexOf( product_name ) );
+        } else {
+            cartList.get( titleList.indexOf( product_name ) ).addQuantity();
+            cartAdapter.itemQtyAdded( titleList.indexOf( product_name ) );
+        }
+        update_total();
     }
+
+    private void update_total() {
+        int total_price = 0;
+        int total_qty = 0;
+
+        if ( titleList.size() != 0) {
+            for (int i = 0; i < titleList.size() ; i++) {
+                total_price += cartList.get(i).getPrice( )
+                        * cartList.get(i).getQty();
+                total_qty += cartList.get(i).getQty();
+            }
+        }
+
+        frag_home_total_paid.setText( R.string.rupiah_denominator );
+        frag_home_total_paid.append( "" + total_price );
+        frag_home_total_qty.setText( String.valueOf( total_qty ) );
+    }
+
+    public void setEditQuantityDialog(String product_name, String currentQty, int position) {
+        /* DIALOG FRAGMENT */
+        DialogEditQuantity dialogFragment =
+                new DialogEditQuantity(
+                        HomeFragment.this,
+                        product_name,
+                        currentQty,
+                        position
+                );
+        dialogFragment.show( requireActivity().getSupportFragmentManager(), TAG );
+    }
+
+    public void setProductQty(int updatedQty, int position) {
+        if (updatedQty != 0){
+            cartList.get(position).setQty( updatedQty );
+            update_total(); cartAdapter.itemUpdated( position );
+        } else {
+            if ( cartList.size() == 1){
+                cartList.remove( 0 );
+                titleList.remove( 0 );
+            }else {
+                cartList.remove( position );
+                titleList.remove(position);
+            }
+            update_total();
+            cartAdapter.itemRemoved( position );
+        }
+    }
+
+    private void callPaymentActivity(){
+        if ( !cartList.isEmpty() ){
+            Intent i = new Intent( getContext(), PaymentActivity.class);
+            i.putExtra("cart", (Serializable) cartList);
+            Log.e(TAG, "Price: " + frag_home_total_paid.getText() );
+            i.putExtra("qty", frag_home_total_qty.getText().toString() );
+            i.putExtra("paid", frag_home_total_paid.getText().toString() );
+            startActivity(i);
+            clearCart();
+        } else Utils.showToast( requireActivity(), getString( R.string.cart_empty_toast ) );
+    }
+
+    private void clearCart() {
+        if ( !cartList.isEmpty() ){
+            int lastPost = cartList.size();
+
+            cartList.clear(); titleList.clear(); update_total();
+            cartAdapter.itemPurged( lastPost );
+        } else Utils.showToast( getContext(), getString( R.string.cart_empty_toast ) );
+    }
+
+    // CALLED FROM API HANDLER;
+    // THIS MAKES SURE THE DATA IS FINISHED LOADING
+    public void notifyFirstInitialization(){
+        productAdapter.notifyItemRangeInserted(0, productList.size() );
+    }
+
 }

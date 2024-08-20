@@ -12,29 +12,44 @@
 
     <!--  CART LAYOUT  -->
     <string name="person_icon">icon of a person</string>
-    <string name="pelanggan">Customer</string>
-    <string name="no_order">"Order Num: "</string>
+    <string name="cart_customer">Customer</string>
+    <string name="cart_order_number">"Order Num: "</string>
     <string name="number">int</string>
+    <string name="cart_purge">Delete All Cart Items</string>
+    <string name="cart_discount">Total Diskon</string>
     <string name="cart_quantity">Total Produk</string>
     <string name="cart_price_text">Total Harga</string>
 
-    <!--  PLACEHOLDER JUDUL FRAGMENT  -->
+    <!--  PLACEHOLDER TITLE FRAGMENT  -->
     <string name="home">HOME</string>
     <string name="receipt">STRUK</string>
     <string name="stub">SIMPANAN</string>
 
-
-    <string name="cart_discount">Total Diskon</string>
+    <!--  PRODUCT RECYCLER VIEW  -->
     <string name="product_image">Image of Product</string>
     <string name="id">ID</string>
-    <string name="rv_receipt_payment">Total Pembayaran: </string>
 
-
+    <!--  COMMONS  -->
     <string name="default_number">0</string>
     <string name="rupiah_denominator">"Rp "</string>
     <string name="nama_produk">Nama Produk</string>
+
+    <!--  RECEIPT FRAGMENT  -->
+    <string name="rv_receipt_payment">Total Pembayaran: </string>
     <string name="rv_receipt_DateTime">Taggal dan Waktu</string>
     <string name="frag_receipt_detail_id">ORDER ID:</string>
     <string name="receipt_detail_total_transactions">Total Transaksi</string>
     <string name="receipt_detail_total_profit_text">Total Keuntungan</string>
+
+    <!--  ACTIVITY PAYMENT  -->
+    <string name="activity_payment_title">Halaman Pembayaran</string>
+    <string name="history_qty">"Total Barang: "</string>
+    <string name="keyboard_backspace">backspace</string>
+
+    <!--  DIALOG CART EDIT QUANTITY  -->
+    <string name="dialog_confirm"> Confirm</string>
+    <string name="dialog_decline"> Decline</string>
+    <string name="dialog_decrease_quantity"> decrement quantity</string>
+    <string name="dialog_increase_quantity">increment quantity</string>
+    <string name="cart_empty_toast">Keranjang Masih Kosong.</string>
 </resources>

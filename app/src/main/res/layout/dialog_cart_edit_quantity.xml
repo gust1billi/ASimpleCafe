@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageButton
+        android:id="@+id/dialog_cart_edit_quantity_decrement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_baseline_arrow_back_24"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/dialog_decrease_quantity" />
+
+    <TextView
+        android:id="@+id/dialog_cart_edit_quantity_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="32dp"
+        android:text="@string/default_number"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/dialog_cart_edit_quantity_decrement"
+        app:layout_constraintRight_toLeftOf="@id/dialog_cart_edit_quantity_increment"/>
+
+    <ImageButton
+        android:id="@+id/dialog_cart_edit_quantity_increment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_baseline_arrow_forward_24"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/dialog_increase_quantity" />
+
+    <TextView
+        android:id="@+id/dialog_quantity_confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dialog_cart_edit_quantity_increment"
+        android:textColor="@color/aquaVitale"
+        android:text="@string/dialog_confirm"/>
+
+    <TextView
+        android:id="@+id/dialog_quantity_decline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="16dp"
+        android:textColor="@color/warning_red"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dialog_cart_edit_quantity_increment"
+        app:layout_constraintRight_toLeftOf="@id/dialog_quantity_confirm"
+        android:text="@string/dialog_decline"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
